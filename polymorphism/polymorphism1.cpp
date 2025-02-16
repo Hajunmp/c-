@@ -13,17 +13,15 @@ class calculator
             cin >> a ;
             cout << "massukin angka ke dua  : ";
             cin >> b ;
-            // x = a;
-            // y = b;
         }
 };
 
 class add : public calculator
 {
     public:
-        void calculate()
+        int calculate()
         {
-             
+             return a+b;
         }
 };
 
@@ -48,18 +46,14 @@ class divide : public calculator
     public:
         int calculate()
         {
-            if(b!=0)
-            {
-                return a/b;
-            }
-            else if(b==0)
+            if (b==0) 
             {
                 return 0;
             }
+            return a/b;
         }
 };
 int pick;
-
 
 int main()
 {
@@ -74,7 +68,35 @@ int main()
     cin >> pick;
     if(pick==1)
     {
-        add math;
-        math.calculate();
+        add maths;
+        maths.a = math.a;
+        maths.b = math.b;
+        cout << maths.a << " + " << maths.b << " = " << maths.calculate();
+    }
+    else if(pick==2)
+    {
+        subtract maths;
+        maths.a = math.a;
+        maths.b = math.b;
+        cout << maths.a << " - " << maths.b << " = " << maths.calculate();
+    }
+    else if(pick==3)
+    {
+        multiply maths;
+        maths.a = math.a;
+        maths.b = math.b;
+        cout << maths.a << "*" << maths.b << " = " << maths.calculate();
+    }
+    else if(pick==4)
+    {
+        divide maths;
+        maths.a = math.a;
+        maths.b = math.b;
+        if (maths.calculate() == 0)
+        {
+            cout << "Cannot divide by 0" << endl;
+        }
+        else if (maths.calculate() != 0)
+        cout << maths.a << "/" << maths.b << " = " << maths.calculate();
     }
 }
