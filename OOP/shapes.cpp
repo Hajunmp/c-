@@ -21,10 +21,10 @@ class square : public shapes
         {
             tall();
             int a = 0;
-            while (a <= height/2)
+            while (a <= height-1)
             {
                 int j = 0;
-                while (j <= height)
+                while (j <= height*2)
                 {
                     cout << "x";
                     j = j+1;
@@ -41,11 +41,12 @@ class rectangle : public shapes
     public:
         rectangle()
         {
+            tall();
             int a = 0;
-            while (a <= height)
+            while (a <= height-1)
             {
                 int j = 0;
-                while (j <= height*2)
+                while (j <= height*4)
                 {
                     cout << "x";
                     j = j+1;
@@ -61,8 +62,9 @@ class triangle : public shapes
     public:
         triangle()
         {
+            tall();
             int a = 0;
-            while (a <= height)
+            while (a <= height-1)
             {
                 int j = 0;
                 while (j <= a)
@@ -81,8 +83,9 @@ class parallelogram : public shapes
     public:
         parallelogram()
         {
+            tall();
             int a = 0;
-            while (a <= height)
+            while (a <= height-1)
             {
                 int i = 0;
                 while (i <= a)
@@ -91,7 +94,7 @@ class parallelogram : public shapes
                     i = i+1;
                 }
                 int j = 0;
-                while (j <= 10)
+                while (j <= height*4)
                 {
                     cout << "x";
                     j = j+1;
