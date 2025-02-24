@@ -9,6 +9,17 @@ class BMI
         double height;
         double weight;
         int bodymass;
+        int weightgoal;
+        int final;
+        int age;
+        int speed;
+        int duration;
+        int MET;
+        int hours;
+        int burn;
+        int burning;
+        int work;
+        int cont;
         void calc()
         {
             cout << "Body-Mass index" << endl;
@@ -28,6 +39,8 @@ class below19 : public BMI
         below19()
         {
             calc();
+            cout << "=====================" << endl;
+            cout << "RESULTS : " << endl;
             if(bodymass<=18.5)
             {
                 cout << "Underweight" << endl;
@@ -61,6 +74,8 @@ class below30 : public BMI
         below30()
         {
             calc();
+            cout << "=====================" << endl;
+            cout << "RESULTS : " << endl;
             if(bodymass<=18.5)
             {
                 cout << "Underweight" << endl;
@@ -95,6 +110,8 @@ class below40 : public BMI
         below40()
         {
             calc();
+            cout << "=====================" << endl;
+            cout << "RESULTS : " << endl;
             if(bodymass<=18)
             {
                 cout << "Underweight" << endl;
@@ -129,6 +146,8 @@ class above40 : public BMI
         above40()
         {
             calc();
+            cout << "=====================" << endl;
+            cout << "RESULTS : " << endl;
             if(bodymass<=17)
             {
                 cout << "Underweight" << endl;
@@ -164,15 +183,6 @@ class above40 : public BMI
 class goal : public BMI
 {
     public:
-        int weightgoal;
-        int final;
-        int age;
-        int speed;
-        int duration;
-        int MET;
-        int hours;
-        int burn;
-        int burning;
         void count_final(double a){
             cout << "Weight Goal : ";
             cin >> weightgoal;
@@ -191,50 +201,67 @@ class goal : public BMI
             }
         }
         void exercise(double a){
-
-            while(burning>0)
+            cout << "====================================" << endl;
+            cout << "Join Our Exercise Program?" << endl; 
+            cout << "1. Join" << endl;
+            cout << "2. Exit" << endl;
+            cout << "Choice : ";
+            cin >> work;
+            if (work==1)
             {
-                cout << burning << " calories needed to burn";
-                cout << "choose your running speed" << endl;
-                cout << "1. 8.0 km/h" << endl;
-                cout << "2. 9.7 km/h" << endl;
-                cout << "3. 11.3 km/h" << endl;
-                cout << "4. 12.9 km/h" << endl;
-                cout << "5. 14.5 km/h" << endl;
-                cout << "choice : ";
-                cin >> speed;
-                if (speed == 1)
+                while(burning>0)
                 {
-                    MET = 6;
+                    cout << "\033[2J\033[1;1H";
+                    cout << "EXERCISE PROGRAM" << endl;
+                    cout << "========================" << endl;
+                    cout << burning << " calories needed to burn" << endl;
+                    cout << "Choose Your Running Speed" << endl;
+                    cout << "1. 8.0 km/h" << endl;
+                    cout << "2. 9.7 km/h" << endl;
+                    cout << "3. 11.3 km/h" << endl;
+                    cout << "4. 12.9 km/h" << endl;
+                    cout << "5. 14.5 km/h" << endl;
+                    cout << "choice : ";
+                    cin >> speed;
+                    if (speed == 1)
+                    {
+                        MET = 6;
+                    }
+                    else if(speed==2)
+                    {
+                        MET = 8;
+                    }
+                    else if(speed==3)
+                    {
+                        MET = 10;
+                    }
+                    else if(speed==4)
+                    {
+                        MET = 11.5;
+                    }
+                    else if(speed==5)
+                    {
+                        MET = 12.8;
+                    }
+                    cout << "duration(minutes) : ";
+                    cin >> duration;
+                    hours = duration/60;
+                    burn = MET*a*duration;
+                    cout << burn << " calories burnt" << endl;
+                    cout << "Enter 0 to continue...";
+                    cin >> cont;
+                    burning -= burn;
                 }
-                else if(speed==2)
-                {
-                    MET = 8;
-                }
-                else if(speed==3)
-                {
-                    MET = 10;
-                }
-                else if(speed==4)
-                {
-                    MET = 11.5;
-                }
-                else if(speed==5)
-                {
-                    MET = 12.8;
-                }
-                cout << "duration(minutes) : ";
-                cin >> duration;
-                hours = duration/60;
-                burn = MET*a*duration;
-                cout << burn << " calories burnt" << endl;
-                burning -= burn;
+                cout << endl;
+                cout << "Goal Has Been Fulfilled" << endl;
             }
+            
         }
         goal()
         {
-            cout << "Welcome to HealthGlow";
-            cout << "=====================";
+            cout << "Welcome to HealthGlow" << endl;
+            cout << "=====================" << endl;
+            cout << "BMI CALCULATIONS" << endl;
             cout << "Age : ";
             cin >> age;
             if(age<=19)
