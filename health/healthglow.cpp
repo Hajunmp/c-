@@ -14,7 +14,7 @@ class BMI
         int age;
         int speed;
         int duration;
-        int MET;
+        double MET;
         int hours;
         int burn;
         int burning;
@@ -295,5 +295,6 @@ int age;
 
 int main()
 {
+    cout << "\033[2J\033[1;1H";
     goal user1;
 }
