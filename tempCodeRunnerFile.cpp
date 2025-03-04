@@ -1,2 +1,0 @@
-cout << "target : ";
-    // cin >> target;
