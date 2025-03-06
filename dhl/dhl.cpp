@@ -4,17 +4,22 @@
 // 2. Login
     // customer
     // 1. Send Package
+    //  =  Nama Penerima, Alamat, Barang, Berat
     // 2. Status
+    //  =  User, Nama Penerima, Alamat, Barang, Berat, Status(boarding, otw, arrive, broke)
 
     // admin
     // 1. Dashboard Package
+    //  = mengatur status package
     // 2. User Control
+    //  = liat semua akun customer
 
     #include <iostream>
     #include <vector>
     #include <string>
     #include <fstream>
     using namespace std;
+
     class Db
     {
     private:
@@ -59,104 +64,130 @@
             }
         }
 
-        void admin()
+        int admin()
         {
+            int choose;
             cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl;
             cout << "1. Dashboard Package" << endl;
             cout << "2. User Control" << endl;
+            cout << "3. Exit" << endl;
+            cin >> choose;
+            if (choose==1)
+            {
+
+            }
+            else if (choose==3)
+            {
+                return 0;
+            }
         }
-        void customer()
+        int customer()
         {
+            int choose;
             cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl;
             cout << "1. Send Package" << endl;
             cout << "2. Status" << endl;
-
+            cout << "3. Exit" << endl;
+            cin >> choose;
+            if (choose==1)
+            {
+                
+            }
+            else if (choose==3)
+            {
+                return 0;
+            }
         }
-        void check(string a, string b)
+        int check(string a, string b)
         {
+            bool exist = false;
             for (int i = 0; i < data_user.size(); i++)
             {
                 for (int j = 0; j < 3; j++)
                 {
+                    cout << "\033[2J\033[1;1H";
                     if(data_user[i][0]==a)
                     {
                         if(data_user[i][1]==b)
                         {
                             cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl;
-                            cout << "Welcome, " << data_user[i][0];
+                            cout << "Welcome, " << data_user[i][0] << endl;
+
                             if(data_user[i][2]=="true")
                             {
-                                admin();
+                                return 1;
                             }
                             else if(data_user[i][2]=="false")
                             {
-                                customer();
+                                return 0;
                             }
-                            break;
                         }
                     }
                 }
             }
-            cout << "Account does not exist" << endl;
-        }
-    };
-    class Regis : public Db
-    {
-    public:
-        string a;
-        string b;
-        int c;
-        bool d;
-        int stop;
-        bool x;
-        Regis()
-        {
-            while (x=true)
+            if (exist==false)
             {
-                cout << "|========================|" << endl;
-                cout << "|        Register        |" << endl;
-                cout << "|========================|" << endl;
-                cout << "|Enter 0 to stop or 1 to continue...";
-                cin >> stop;
-                if (stop==0)
-                {
-                    cout << "\033[2J\033[1;1H";
-                    break;
-                }else{
-
-                    cout << "|Username : ";
-                    cin >> a;
-                    cout << "|Password : ";
-                    cin >> b;
-                    cout << "(1)Admin or (2)Customer = ";
-                    cin >> c;
-    
-                    if (c==1){
-                        d=true;
-                    }
-                    else if(c==2){
-                        d=false;
-                    }
-    
-                    set(a, b, d);
-                    insert();
-                    show();
-                }
-
+                return 2;
             }
         }
     };
 
-    class Login : public Db
+    
+    class Regis : public Db
     {
     public:
-        string a;
-        string b;
+        int stop;
         bool x;
-        void Logging()
+        void regis()
         {
+            string a;
+            string b;
+            int c;
+            bool d;
+            while (x=true)
+            {
+                cout << "\033[2J\033[1;1H";
+                cout << "|========================|" << endl;
+                cout << "|        Register        |" << endl;
+                cout << "|========================|" << endl;
+                cout << "|Username : ";
+                cin >> a;
+                cout << "|Password : ";
+                cin >> b;
+                cout << "(1)Admin or (2)Customer = ";
+                cin >> c;
+    
+                if (c==1){
+                    d=true;
+                }
+                else if(c==2){
+                    d=false;
+                }
+
+                set(a, b, d);
+                insert();
+                show();
+                cout << "|Enter 0 to stop or 1 to continue...";
+                cin >> stop;
+                
+                if (stop==0){
+                    cout << "\033[2J\033[1;1H";
+                    break;
+                }
+                else{
+                    continue;
+                }
+            }
+        }
+        void logging()
+        {
+            string a;
+            string b;
+            int c;
+            bool x;
             while(x=true)
             {
+                cout << "\033[2J\033[1;1H";
                 cout << "|========================|" << endl;
                 cout << "|         Log In         |" << endl;
                 cout << "|========================|" << endl;
@@ -164,8 +195,54 @@
                 cin >> a;
                 cout << "|Password : ";
                 cin >> b;
+                if (check(a, b)==1)
+                {
+                    if(admin()==0)
+                    {
+                        break;
+                    }
+                }
+                else if(check(a, b)==0)
+                {
+                    if(customer()==0)
+                    {
+                        break;
+                    }
+                }
+                else if(check(a, b)==2)
+                {
+                    cout << "Account does not exist" << endl;
+                    cout << "Enter 0 to go back...";
+                    cin >> c;
+                    break;
+                }
+            }
+        }
+        void menu(){
+            int choose;
+            while(true)
+            {
                 cout << "\033[2J\033[1;1H";
-                check(a, b);
+                cout << "|=========================|" << endl;
+                cout << "|        Main Menu        |" << endl;
+                cout << "|=========================|" << endl;
+                cout << "|1. Register " << endl;
+                cout << "|2. Log In " << endl;
+                cout << "|3. Exit " << endl;
+                cout << "|=========================|" << endl;
+                cin >> choose;
+                if(choose==1)
+                {
+                    regis();
+                }
+                else if(choose==2)
+                {
+                    logging();
+                }
+                else if(choose==3)
+                {
+                    break;
+                }
             }
         }
     };
@@ -173,6 +250,5 @@
     int main()
     {
         Regis a;
-        Login b;
-        b.Logging();
+        a.menu();
     }
