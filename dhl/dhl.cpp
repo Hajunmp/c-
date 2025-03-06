@@ -132,8 +132,12 @@
         }
     };
 
-    
-    class Regis : public Db
+    class user : public Db
+    {
+    public : 
+        
+    };
+    class Regis : public user
     {
     public:
         int stop;
