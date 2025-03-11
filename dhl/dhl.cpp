@@ -13,6 +13,7 @@
     //  = mengatur status package
     // 2. User Control
     //  = liat semua akun customer
+    //  = bisa menghapus akun dan update (password) akun customer
 
     #include <iostream>
     #include <vector>
@@ -224,6 +225,59 @@
                 }
             }
         }
+
+        void userlist()
+        {
+            int stop;
+            bool x;
+            while (x=true)
+            {
+                int a=0;
+                cout << "\033[2J\033[1;1H";
+                cout << "|========================|" << endl;
+                cout << "|      List of Users     |" << endl;
+                cout << "|========================|" << endl;
+                cout << "|Accounts :              |" << endl;
+                for(int i=0; i<data_user.size(); i++)
+                {
+                    if(data_user[i][2]=="false")
+                    {
+                        cout << a+1 << ". ";
+                        for(int j=0; j<2; j++)
+                        {
+                            cout << "(" << data_user[i][j] << ")";
+                        }
+                        a+=1;
+                        cout << endl;
+                    }
+                }
+
+                cout << "|Enter 0 to stop or 1 to continue...";
+                cin >> stop;
+                if (stop==0){
+                    cout << "\033[2J\033[1;1H";
+                    break;
+                }
+                else{
+                    continue;
+                }
+            }
+        }
+
+        void user_control()
+        {
+            int stop;
+            bool x;
+            while (x=true)
+            {
+                cout << "\033[2J\033[1;1H";
+                cout << "|=======================|" << endl;
+                cout << "|      User Control     |" << endl;
+                cout << "|=======================|" << endl;
+                cout << "|1. List of Us           |" << endl;
+                
+            }
+        }
     };
 
     class user : public Db
@@ -244,6 +298,10 @@
                 if (choose==1)
                 {
                     dashboard();
+                }
+                else if (choose==2)
+                {
+                    user_control();
                 }
                 else if (choose==3)
                 {
