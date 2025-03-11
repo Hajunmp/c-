@@ -169,59 +169,71 @@
             bool x;
             while(x=true)
             {
-                cout << "Package info = " << "\n";
-                cout << "User -- pass -- receiver -- address -- object -- weight -- Status " << "\n";
-                for (int i = 0; i < package.size(); i++)
-                {
-                    cout << i+1 << ". ";
-                    for (int j = 0; j < 7; j++)
-                    {
-                        cout << "(" << package[i][j] << ")";
-                    }
-                    cout << "\n";
-                }
-                cout << "Change user no. ";
-                cin >> num;
                 cout << "\033[2J\033[1;1H";
-                cout << "|========================|" << endl;
-                cout << "|      Update Status     |" << endl;
-                cout << "|========================|" << endl;
-                cout << "| user : " << package[num-1][0] << endl;
-                cout << "| status : " << package[num-1][6] << endl;
-                cout << "|------------------------|" << endl;
-                cout << "| 1. Boarding            |" << endl;
-                cout << "| 2. On the Way          |" << endl;
-                cout << "| 3. Arrived             |" << endl;
-                cout << "| 4. Broken              |" << endl;
-                cout << "|========================|" << endl;
-                cout << "| Choice : ";
-                cin >> choose;
-                if(choose==1)
+                if(package.size()>0)
                 {
-                    package[num-1][6] = "Boarding";   
+                    cout << "Package info = " << "\n";
+                    cout << "User -- pass -- receiver -- address -- object -- weight -- Status " << "\n";
+                    for (int i = 0; i < package.size(); i++)
+                    {
+                        cout << i+1 << ". ";
+                        for (int j = 0; j < 7; j++)
+                        {
+                            cout << "(" << package[i][j] << ")";
+                        }
+                        cout << "\n";
+                    }
+                    cout << "Change user no. ";
+                    cin >> num;
+                    cout << "\033[2J\033[1;1H";
+                    cout << "|========================|" << endl;
+                    cout << "|      Update Status     |" << endl;
+                    cout << "|========================|" << endl;
+                    cout << "| user : " << package[num-1][0] << endl;
+                    cout << "| status : " << package[num-1][6] << endl;
+                    cout << "|------------------------|" << endl;
+                    cout << "| 1. Boarding            |" << endl;
+                    cout << "| 2. On the Way          |" << endl;
+                    cout << "| 3. Arrived             |" << endl;
+                    cout << "| 4. Broken              |" << endl;
+                    cout << "|========================|" << endl;
+                    cout << "| Choice : ";
+                    cin >> choose;
+                    if(choose==1)
+                    {
+                        package[num-1][6] = "Boarding";   
+                    }
+                    else if(choose==2)
+                    {
+                        package[num-1][6] = "On the Way";   
+                    }
+                    else if(choose==3)
+                    {
+                        package[num-1][6] = "Arrived";   
+                    }
+                    else if(choose==4)
+                    {
+                        package[num-1][6] = "Broken";   
+                    }
+                    cout << "Status Successfully Updated!" << endl;
+                    cout << "|Enter 0 to stop or 1 to continue...";
+                    cin >> stop;
+                        
+                    if (stop==0){
+                        cout << "\033[2J\033[1;1H";
+                        break;
+                    }
+                    else{
+                        continue;
+                    }
                 }
-                else if(choose==2)
+                else if(package.size()<1)
                 {
-                    package[num-1][6] = "On the Way";   
-                }
-                else if(choose==3)
-                {
-                    package[num-1][6] = "Arrived";   
-                }
-                else if(choose==4)
-                {
-                    package[num-1][6] = "Broken";   
-                }
-                cout << "Status Successfully Updated!" << endl;
-                cout << "|Enter 0 to stop or 1 to continue...";
-                cin >> stop;
-                    
-                if (stop==0){
+                    cout << "There are no packages" << endl;
+                    cout << "|Enter 0 to go back...";
+                    cin >> stop;
                     cout << "\033[2J\033[1;1H";
                     break;
-                }
-                else{
-                    continue;
                 }
             }
         }
@@ -251,7 +263,125 @@
                         cout << endl;
                     }
                 }
+                cout << "|Enter 0 to stop or 1 to continue...";
+                cin >> stop;
+                if (stop==0){
+                    cout << "\033[2J\033[1;1H";
+                    break;
+                }
+                else{
+                    continue;
+                }
+            }
+        }
 
+        void update()
+        {
+            int stop;
+            bool x;
+            int choose;
+            string newpass;
+            while (x=true)
+            {
+                int a=0;
+                cout << "\033[2J\033[1;1H";
+                cout << "|=======================|" << endl;
+                cout << "|      Update Users     |" << endl;
+                cout << "|=======================|" << endl;
+                cout << "|Accounts :             |" << endl;
+                for(int i=0; i<data_user.size(); i++)
+                {
+                    if(data_user[i][2]=="false")
+                    {
+                        cout << "|" << a+1 << ". ";
+                        for(int j=0; j<2; j++)
+                        {
+                            cout << "(" << data_user[i][j] << ")";
+                        }
+                        a+=1;
+                        cout << endl;
+                    }
+                }
+                cout << "|=======================|" << endl;
+                cout << "|Update User Number : ";
+                cin >> choose;
+                cout << "|New Password : ";
+                cin >> newpass;
+                for(int i=0; i<data_user.size(); i++)
+                {
+                    for(int j=0; j<package.size(); j++)
+                    {
+                        if(package[j][0]==data_user[i][0])
+                        {
+                            if(package[j][1]==data_user[i][1])
+                            {
+                                package[j][1]=newpass;
+                            }
+                        }
+                    }
+                }
+                data_user[choose-1][1]=newpass;
+                
+
+                cout << "|Password Successfully Updated" << endl;
+                cout << "|Enter 0 to stop or 1 to continue...";
+                cin >> stop;
+                if (stop==0){
+                    cout << "\033[2J\033[1;1H";
+                    break;
+                }
+                else{
+                    continue;
+                }
+            }
+        }
+
+        void del()
+        {
+            int stop;
+            bool x;
+            int choose;
+            while (x=true)
+            {
+                int a=0;
+                cout << "\033[2J\033[1;1H";
+                cout << "|=======================|" << endl;
+                cout << "|      Delete Users     |" << endl;
+                cout << "|=======================|" << endl;
+                cout << "|Accounts :             |" << endl;
+                for(int i=0; i<data_user.size(); i++)
+                {
+                    if(data_user[i][2]=="false")
+                    {
+                        cout << "|" << a+1 << ". ";
+                        for(int j=0; j<2; j++)
+                        {
+                            cout << "(" << data_user[i][j] << ")";
+                        }
+                        a+=1;
+                        cout << endl;
+                    }
+                }
+                cout << "|=======================|" << endl;
+                cout << "|Delete User Number : ";
+                cin >> choose;
+                for(int i=0; i<data_user.size(); i++)
+                {
+                    for(int j=0; j<package.size(); j++)
+                    {
+                        if(package[j][0]==data_user[i][0])
+                        {
+                            if(package[j][1]==data_user[i][1])
+                            {
+                                package.erase(package.begin()+ j);
+                            }
+                        }
+                    }
+                }
+                data_user.erase(data_user.begin()+ choose-1);
+                
+
+                cout << "|User Successfully Deleted" << endl;
                 cout << "|Enter 0 to stop or 1 to continue...";
                 cin >> stop;
                 if (stop==0){
@@ -266,16 +396,38 @@
 
         void user_control()
         {
-            int stop;
+            int choice;
             bool x;
             while (x=true)
             {
                 cout << "\033[2J\033[1;1H";
-                cout << "|=======================|" << endl;
-                cout << "|      User Control     |" << endl;
-                cout << "|=======================|" << endl;
-                cout << "|1. List of Us           |" << endl;
-                
+                cout << "|==========================|" << endl;
+                cout << "|       User Control       |" << endl;
+                cout << "|==========================|" << endl;
+                cout << "|1. List of Users          |" << endl;
+                cout << "|2. Update User Accounts   |" << endl;
+                cout << "|3. Delete User Account    |" << endl;
+                cout << "|4. Exit                   |" << endl;
+                cout << "|--------------------------|" << endl;
+                cout << "| Choice : ";
+                cin >> choice;
+                if(choice==1)
+                {
+                    userlist();
+                }
+                else if(choice==2)
+                {
+                    update();
+                }
+                else if(choice==3)
+                {
+                    del();
+                }
+                else if(choice==4)
+                {
+                    cout << "\033[2J\033[1;1H";
+                    break;
+                }
             }
         }
     };
@@ -479,6 +631,7 @@
                 }
                 else if(choose==3)
                 {
+                    cout << "\033[2J\033[1;1H";
                     break;
                 }
             }
